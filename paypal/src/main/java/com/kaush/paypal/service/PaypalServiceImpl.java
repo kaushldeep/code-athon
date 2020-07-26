@@ -1,43 +1,33 @@
 package com.kaush.paypal.service;
 
-import com.kaush.paypal.model.Transaction;
+import com.kaush.paypal.dao.TransactionDaoImpl;
 import com.kaush.paypal.model.TransactionDetails;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Component
 public class PaypalServiceImpl {
 
-    public TransactionDetails getTransactionsByDate(String Date) {
+    @Autowired
+    private TransactionDaoImpl transactionDaoImpl;
+
+    public TransactionDetails getTransactionsByDate(String date) {
         TransactionDetails transactionDetails = new TransactionDetails();
-        List<Transaction> transList = new ArrayList<Transaction>();
-
-        transactionDetails.setTransactionList(transList);
+        transactionDetails.setTransactionList(transactionDaoImpl.getTransactionByDate(date));
         return transactionDetails;
-
-
     }
 
     public TransactionDetails getTransactionsByUser(String userId) {
         TransactionDetails transactionDetails = new TransactionDetails();
-        List<Transaction> transList = new ArrayList<Transaction>();
-
-        transactionDetails.setTransactionList(transList);
+        transactionDetails.setTransactionList(transactionDaoImpl.getTransactionByUserId(userId));
         return transactionDetails;
-
-
     }
 
-    public TransactionDetails getTransactionsByUserAndTransactionType(Transaction transaction) {
+    public TransactionDetails getTransactionsByUserAndTransactionType(String userId, String transactionType) {
         TransactionDetails transactionDetails = new TransactionDetails();
-        List<Transaction> transList = new ArrayList<Transaction>();
-
-        transactionDetails.setTransactionList(transList);
+        transactionDetails.setTransactionList(
+                transactionDaoImpl.getTransactionByUserIdAndType(
+                        userId,transactionType));
         return transactionDetails;
-
     }
-
-
 }

@@ -3,14 +3,13 @@ package com.kaush.paypal.model;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 @JsonPropertyOrder({ "transactionType", "userId", "transactionDate", "amount" })
 public class Transaction {
 
     private String transactionType;
     private String userId;
-    private Date transactionDate;
+    private String transactionDate;
     private BigDecimal amount;
 
     public String getUserId() {
@@ -21,11 +20,11 @@ public class Transaction {
         this.userId = userId;
     }
 
-    public Date getTransactionDate() {
+    public String getTransactionDate() {
         return transactionDate;
     }
 
-    public void setTransactionDate(Date transactionDate) {
+    public void setTransactionDate(String transactionDate) {
         this.transactionDate = transactionDate;
     }
 
